@@ -6,19 +6,17 @@ import Results from './results';
 
 const Screens = () => (
   <Router>
-    <body>
-      <Switch>
-        <Route path='/quiz'>
-          <Quiz />
-        </Route>
-        <Route path='/results'>
-          <Results />
-        </Route>
-        <Route path='/'>
-          <Home />
-        </Route>
-      </Switch>
-    </body>
+    <Switch>
+      <Route path='/quiz'>
+        <Quiz />
+      </Route>
+      <Route path='/results'>
+        <Results />
+      </Route>
+      <Route path='/'>
+        <Home />
+      </Route>
+    </Switch>
   </Router>
 );
 

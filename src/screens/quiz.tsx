@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '../components';
 
 const Quiz = () => (
-  <div class='container'>
+  <div className='container'>
     <h1>Entertainment: Video Games</h1>
     <div id='box'>
       <h2 id='question'> Unturned originally started as a Roblox game.</h2>
