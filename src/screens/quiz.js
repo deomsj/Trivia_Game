@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '../components';
 
 const Quiz = () => (
   <div class='container'>
@@ -8,12 +9,8 @@ const Quiz = () => (
       <h2 id='question'> Unturned originally started as a Roblox game.</h2>
     </div>
     <p>1 of 10</p>
-    <Link to='/results'>
-      <button class='button'>True</button>
-    </Link>
-    <Link to='/results'>
-      <button class='button'>False</button>
-    </Link>
+    <Button url='/results' text='True' />
+    <Button url='/results' text='False' />
   </div>
 );
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import { Button } from '../components';
 
 const Results = () => (
   <div class='container'>
@@ -49,9 +50,7 @@ const Results = () => (
         to FirstGroup and MTR in March of 2017.
       </li>
     </ul>
-    <Link to='/'>
-      <button class='button'>PLAY AGAIN?</button>
-    </Link>
+    <Button url='/' text='PLAY AGAIN?' />
   </div>
 );
 
