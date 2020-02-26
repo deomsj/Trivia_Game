@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { Button } from '../components';
 
