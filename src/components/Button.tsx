@@ -1,14 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button as ButtonProps } from '../interfaces';
 
-interface IButton {
-  url: string;
-  text: string;
-}
-
-const Button = ({ url, text }: IButton) => (
+const Button = ({ url, text, dispatch = () => null }: ButtonProps) => (
   <Link to={url}>
-    <button className='button'>{text}</button>
+    <button className='button' onClick={dispatch}>
+      {text}
+    </button>
   </Link>
 );
 
