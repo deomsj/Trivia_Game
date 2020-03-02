@@ -3,23 +3,23 @@ import {
   RECEIVE_QUESTIONS,
   REJECT_QUESTIONS,
 } from './types';
-import { QuestionAction, QuestionsList } from '../../interfaces';
+import { QuestionAction, QuestionsList } from '../interfaces';
 import { Dispatch } from 'redux';
-import { getQuestions } from '../../services/opentdb';
+import { fetchQuestions } from '../../services/opentdb';
 
-export const fetchQuestions = () => (dispatch: Dispatch): void => {
+export const getQuestions = () => (dispatch: Dispatch): void => {
   dispatch(requestQuestions());
 
-  getQuestions()
+  fetchQuestions()
     .then((questions: QuestionsList) => dispatch(receiveQuestions(questions)))
     .catch(() => dispatch(rejectQuestions()));
 };
 
-const requestQuestions = () => ({ type: REQUEST_QUESTIONS });
+const requestQuestions = (): QuestionAction => ({ type: REQUEST_QUESTIONS });
 
 const receiveQuestions = (questions: QuestionsList): QuestionAction => ({
   type: RECEIVE_QUESTIONS,
   questions,
 });
 
-const rejectQuestions = () => ({ type: REJECT_QUESTIONS });
+const rejectQuestions = (): QuestionAction => ({ type: REJECT_QUESTIONS });

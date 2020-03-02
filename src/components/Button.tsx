@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button as ButtonProps } from '../interfaces';
+interface Button {
+  text: string;
+  callback: () => void;
+}
 
-const Button = ({ url, text, dispatch = () => null }: ButtonProps) => (
-  <Link to={url}>
-    <button className='button' onClick={dispatch}>
-      {text}
-    </button>
-  </Link>
+const Button = ({ callback, text }: Button) => (
+  <button className='button' onClick={callback}>
+    {text}
+  </button>
 );
 
 export default Button;

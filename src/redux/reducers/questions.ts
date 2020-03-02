@@ -3,7 +3,7 @@ import {
   RECEIVE_QUESTIONS,
   REJECT_QUESTIONS,
 } from '../actions/types';
-import { QuestionAction, Questions } from '../../interfaces';
+import { QuestionAction, Questions } from '../interfaces';
 
 const initialState: Questions = {
   isFetching: false,

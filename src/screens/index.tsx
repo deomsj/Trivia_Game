@@ -7,15 +7,9 @@ import Results from './results';
 const Screens = () => (
   <Router>
     <Switch>
-      <Route path='/quiz'>
-        <Quiz />
-      </Route>
-      <Route path='/results'>
-        <Results />
-      </Route>
-      <Route path='/'>
-        <Home />
-      </Route>
+      <Route path='/quiz' component={Quiz} />>
+      <Route path='/results' component={Results} />
+      <Route path='/' component={Home} />
     </Switch>
   </Router>
 );
