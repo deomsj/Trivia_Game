@@ -6,6 +6,7 @@ import { Action } from 'redux';
 export interface RootState {
   userAnswers: UserAnswers;
   questions: Questions;
+  settings: Settings;
 }
 
 export interface UserAnswers {
@@ -18,15 +19,23 @@ export interface Questions {
   list: QuestionsList;
 }
 
+export interface QuestionSettings {
+  difficulty: string;
+  category: number;
+}
+
+export interface Settings extends QuestionSettings {
+  categoriesList: CategoriesList;
+}
+
 ///////////////////////////////
 // Data Models
 
 export interface QuestionsList extends Array<Question> {}
 
 interface QuizProgress {
-  isLast: boolean;
+  onLastQuestion: boolean;
   answersCount: number;
-  questionsCount: number;
 }
 
 enum TrueOrFalseString {
@@ -41,16 +50,35 @@ export interface Question {
   question: string;
   correct_answer: TrueOrFalseString;
   incorrect_answers: Array<TrueOrFalseString>;
-  quizProgress?: QuizProgress;
 }
+
+export interface CurrentQuestion extends Question {
+  quizProgress: QuizProgress;
+}
+
+interface TriviaCategory {
+  id: number;
+  name: string;
+}
+
+export interface CategoriesList extends Array<TriviaCategory> {}
 
 ///////////////////////////////
 // Redux Actions
 
-export interface QuestionAction extends Action {
+export interface QuestionAction extends Action, UpdateSettings {
   questions?: QuestionsList;
 }
 
 export interface AnswerAction extends Action {
   isCorrect: boolean;
+}
+
+export interface UpdateSettings {
+  difficulty?: string;
+  category?: number;
+}
+
+export interface SettingsAction extends Action, UpdateSettings {
+  categoriesList?: CategoriesList;
 }

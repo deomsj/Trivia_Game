@@ -1,11 +1,18 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { shallowEqual, useSelector } from 'react-redux';
-import { Button, ResultIcon } from '../components';
+import { restart } from '../redux/actions';
+import { Button, Celebration, ResultIcon } from '../components';
 import { selectUserAnswers, selectQuestions } from '../redux/selectors';
+import { QUESTION_COUNT } from '../services';
 
 const Results = ({ history }: RouteComponentProps) => {
-  const playAgain = () => history.push('/');
+  const dispatch = useDispatch();
+  const playAgain = () => {
+    dispatch(restart());
+    history.push('/');
+  };
   const { isCorrectList, totalCorrect } = useSelector(
     selectUserAnswers,
     shallowEqual,
@@ -13,7 +20,7 @@ const Results = ({ history }: RouteComponentProps) => {
   const questions = useSelector(selectQuestions, shallowEqual);
 
   const resultsList = questions.map(({ question }, index) => (
-    <li className='listItem' key={question}>
+    <li className='list-item' key={question}>
       <ResultIcon isCorrect={isCorrectList[index]} />{' '}
       <span dangerouslySetInnerHTML={{ __html: question }} />
     </li>
@@ -22,7 +29,10 @@ const Results = ({ history }: RouteComponentProps) => {
   return (
     <div className='container'>
       <h1>You scored</h1>
-      <h1>{totalCorrect}/10</h1>
+      <h1>
+        {totalCorrect}/{QUESTION_COUNT}
+      </h1>
+      <Celebration isPartyTime={totalCorrect === QUESTION_COUNT} />
       <ul id='list'>{resultsList}</ul>
       <Button text='PLAY AGAIN?' callback={playAgain} />
     </div>

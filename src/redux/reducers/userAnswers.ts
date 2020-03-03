@@ -1,4 +1,4 @@
-import { SELECT_ANSWER, REQUEST_QUESTIONS } from '../actions/types';
+import { SELECT_ANSWER, REPLAY } from '../actions/types';
 import { UserAnswers, AnswerAction } from '../interfaces';
 
 const initialState: UserAnswers = { isCorrectList: [], totalCorrect: 0 };
@@ -12,7 +12,7 @@ const answers = (state = initialState, action: AnswerAction) => {
         isCorrectList: [...isCorrectList, isCorrect],
         totalCorrect: totalCorrect + (isCorrect ? 1 : 0),
       };
-    case REQUEST_QUESTIONS:
+    case REPLAY:
       return initialState;
     default:
       return state;
