@@ -1,7 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -13,12 +16,23 @@ h1 {
   margin: 0;
 }
 
-#root {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
+button {
+  background: none;
+  color: inherit;
+  border: none;
+  font: inherit;
+  font-size: 20px;
+  padding: 10px 15px;
+  margin: 0 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 500ms;
+}
+
+button:focus {
+  background: darkslateblue;
+  color: white;
+  outline: none;
 }
 
 /*Classes*/
@@ -31,19 +45,11 @@ h1 {
   max-height: 95%;
   max-width: 800px;
   overflow-y: auto;
+  padding-bottom: 10px;
 }
 
-.button {
-  font-size: 20px;
-  padding: 10px 15px;
-  margin: 0 10px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.button:focus {
-  outline: none;
-  background-color: lightslategray;
+.button--lifted {
+  box-shadow: 2px 2px 6px darkslateblue;
 }
 
 .list-item {
@@ -54,18 +60,27 @@ h1 {
 }
 
 .list-item:hover {
-  background-color: lightgray;
+  background-color: #ededed;
 }
 
 .list-item svg {
-  padding: 2px 8px 2px 2px;
+  padding: 0;
+  margin: 2px 8px 2px 2px;
   flex-shrink: 0;
 }
 
 .settings-icon {
   display: block;
-  padding: 10px;
+  padding: 10px 10px 7px;
   margin: 20px;
+}
+
+.settings-icon:active,
+.settings-icon:focus {
+  outline: none;
+  background: darkslateblue;
+  color: white;
+  border-radius: 10px;
 }
 
 .settings-list {
@@ -80,16 +95,131 @@ h1 {
 }
 
 .settings-list > li {
-  padding: 10px 10px;
-  margin: 5px;
+  margin: 5px 0;
   border-radius: 5px;
   cursor: pointer;
   transition: 500ms;
 }
 
-li.selected {
+.selected {
   background-color: slategray;
   color: white;
+}
+
+.loader__type-error {
+  text-align: center;
+  opacity: 0;
+  animation: fade-in 1s linear 1 forwards;
+}
+
+.loader__network-error {
+  text-align: center;
+  opacity: 0;
+  animation: fade-in 1s linear 1 forwards 3.5s;
+}
+
+.loader__connection-icon {
+  position: relative;
+  top: -90px;
+  color: darkslateblue;
+}
+
+.loader__cta {
+  text-decoration: none;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  color: darkslateblue;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.loader__cta:active,
+.loader__cta:focus {
+  background: darkslateblue;
+  color: white;
+  outline: none;
+}
+
+svg {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ----------------------------------
+  loader animation modified from source: https://www.w3schools.com/howto/howto_css_loader.asp
+  ----------------------------------- */
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid slategray; /* Blue */
+  border-radius: 50%;
+  margin: 0 auto;
+  width: 120px;
+  height: 120px;
+  opacity: 0;
+  animation: spin 1.5s linear infinite 0.5s, fade 5s linear 1s forwards;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 700ms;
+  animation-name: animatebottom;
+  animation-duration: 700ms;
+  max-height: 100%;
+}
+
+@-webkit-keyframes animatebottom {
+  from {
+    bottom: -100px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0px;
+    opacity: 1;
+  }
+}
+
+@keyframes animatebottom {
+  from {
+    bottom: -100px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
 }
 
 /*IDs*/
@@ -103,25 +233,24 @@ li.selected {
   padding: 20px;
   margin: 20px;
 }
+
 #list {
   list-style: none;
   padding: 0;
   text-align: left;
+  height: calc(100% - 200px);
+  overflow-y: scroll;
 }
+
+#root {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
 #question {
   text-align: center;
-}
-
-@media only screen and (max-height: 700px) {
-  #list {
-    height: 400px;
-    overflow-y: scroll;
-  }
-}
-
-@media only screen and (max-height: 600px) {
-  #list {
-    height: 300px;
-    overflow-y: scroll;
-  }
+  word-break: break-word;
 }

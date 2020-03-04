@@ -2,7 +2,6 @@ import {
   REPLAY,
   REQUEST_CATEGORIES,
   RECEIVE_CATEGORIES,
-  REJECT_CATEGORIES,
   UPDATE_SETTINGS,
 } from './types';
 import { Action } from 'redux';
@@ -15,6 +14,7 @@ import {
   RootState,
 } from '../interfaces';
 import { selectCategoriesList } from '../selectors';
+import { networkError } from './errors';
 
 export const restart = (): Action => ({
   type: REPLAY,
@@ -42,7 +42,7 @@ export const getCategories = () => (
       .then((questions: CategoriesList) =>
         dispatch(receiveCategories(questions)),
       )
-      .catch(() => dispatch(rejectCategories()));
+      .catch(() => dispatch(networkError()));
   }
 };
 
@@ -52,5 +52,3 @@ const receiveCategories = (categoriesList: CategoriesList): SettingsAction => ({
   type: RECEIVE_CATEGORIES,
   categoriesList,
 });
-
-const rejectCategories = (): SettingsAction => ({ type: REJECT_CATEGORIES });

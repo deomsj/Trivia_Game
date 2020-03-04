@@ -16,9 +16,9 @@ export interface UserAnswers {
 
 export interface Questions {
   isFetching: boolean;
+  invalidSettings: boolean;
   list: QuestionsList;
 }
-
 export interface QuestionSettings {
   difficulty: string;
   category: number;
@@ -53,6 +53,7 @@ export interface Question {
 }
 
 export interface CurrentQuestion extends Question {
+  invalidSettings: boolean;
   quizProgress: QuizProgress;
 }
 

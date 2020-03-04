@@ -6,12 +6,15 @@ interface Button {
 
 const Button = ({ callback, text }: Button) => {
   let button: RefObject<HTMLButtonElement> = createRef();
-  const handleClick = () => {
+  const blur = () => {
     button.current && button.current.blur();
-    callback();
   };
   return (
-    <button className='button' onClick={handleClick} ref={button}>
+    <button
+      className='button--lifted'
+      onClick={callback}
+      onMouseUp={blur}
+      ref={button}>
       {text}
     </button>
   );

@@ -16,16 +16,14 @@ export const fetchQuestions = ({
   if (category > 0) {
     url += `&category=${category}`;
   }
-  return axios
-    .get(url)
-    .then(response => {
+  return axios.get(url).then(response => {
+    if (response.data.response_code === 0) {
       return response.data.results.map((q: Question) => ({
         ...q,
         question: sanitize(q.question),
       }));
-    })
-    .catch(() => {
-      console.log('Please check your internet connection and try again.');
-      return [];
-    });
+    } else {
+      throw Error('invalid_response');
+    }
+  });
 };

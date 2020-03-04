@@ -1,7 +1,7 @@
 import {
   REQUEST_CATEGORIES,
   RECEIVE_CATEGORIES,
-  REJECT_CATEGORIES,
+  NETWORK_ERROR,
   UPDATE_SETTINGS,
 } from '../actions/types';
 import { Settings, SettingsAction } from '../interfaces';
@@ -25,7 +25,7 @@ const settings = (state = initialState, action: SettingsAction) => {
         fetching: false,
         categoriesList: action.categoriesList,
       };
-    case REJECT_CATEGORIES:
+    case NETWORK_ERROR:
       return initialState;
     case UPDATE_SETTINGS:
       return {

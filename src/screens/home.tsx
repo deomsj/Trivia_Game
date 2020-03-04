@@ -22,7 +22,7 @@ const Home = ({ history }: RouteComponentProps) => {
       <h2>Can you score 100%?</h2>
       <Button text='BEGIN' callback={startQuiz} />
       <Link to='/settings' className='settings-icon'>
-        <FaCog />
+        <FaCog size='2.5em' />
       </Link>
     </div>
   );

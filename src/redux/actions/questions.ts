@@ -7,6 +7,7 @@ import { QuestionAction, QuestionsList, RootState } from '../interfaces';
 import { Dispatch } from 'redux';
 import { fetchQuestions } from '../../services';
 import { selectQuestionSettings } from '../selectors';
+import { networkError } from './errors';
 
 export const getQuestions = () => (
   dispatch: Dispatch,
@@ -16,7 +17,13 @@ export const getQuestions = () => (
   const questionSettings = selectQuestionSettings(getState());
   fetchQuestions(questionSettings)
     .then((questions: QuestionsList) => dispatch(receiveQuestions(questions)))
-    .catch(() => dispatch(rejectQuestions()));
+    .catch((error: Error) => {
+      if (error.message === 'invalid_response') {
+        dispatch(rejectQuestions());
+      } else {
+        dispatch(networkError());
+      }
+    });
 };
 
 const requestQuestions = (): QuestionAction => ({

@@ -7,8 +7,4 @@ export const fetchCategories = (): Promise<CategoriesList> =>
     .then(response => [
       { id: 0, name: 'All' },
       ...response.data.trivia_categories,
-    ])
-    .catch(() => {
-      console.log('Please check your internet connection and try again.');
-      return [];
-    });
+    ]);

@@ -7,6 +7,7 @@ export const selectCurrentQuestion = (store: RootState): CurrentQuestion => {
   const onLastQuestion = answersCount + 1 === QUESTION_COUNT;
   return {
     ...store.questions.list[answersCount],
+    invalidSettings: store.questions.invalidSettings,
     quizProgress: {
       onLastQuestion,
       answersCount,
