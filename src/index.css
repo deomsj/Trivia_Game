@@ -26,7 +26,7 @@ button {
   margin: 0 5px;
   border-radius: 10px;
   cursor: pointer;
-  transition: 500ms;
+  transition: background 500ms;
 }
 
 button:focus {
@@ -73,6 +73,7 @@ button:focus {
   display: block;
   padding: 10px 10px 7px;
   margin: 20px;
+  color: darkslateblue;
 }
 
 .settings-icon:active,
